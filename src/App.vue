@@ -1,6 +1,7 @@
 <script setup>
 import { useWindowSize, useWindowScroll } from "@vueuse/core";
-import { computed } from "vue";
+/* import { myFunction } from "./helpers/helpers"; */
+import { computed, ref } from "vue";
 
 const { height } = useWindowSize();
 
@@ -9,10 +10,25 @@ const { y } = useWindowScroll();
 let por = computed(() => {
   return (y.value / height.value) * 100;
 });
+
+// --------------------
+
+/* const scrollDemo = document.getElementById("hi");
+
+scrollDemo.addEventListener("scroll", () => {
+  console.log("aqui", scrollDemo.scrollTop);
+}); */
+
+let test = () => {
+  const htmlElement = document.documentElement;
+  const percentOfScreenHeightScrolled =
+    htmlElement.scrollTop / htmlElement.clientHeight;
+  console.log(Math.min(percentOfScreenHeightScrolled * 100, 100));
+};
 </script>
 
 <template>
-  <div class="wall">
+  <div class="wall" :on-scroll="test()" id="hi">
     <!-- page1 -->
     <div class="full-section page1">
       <div class="top-name">
